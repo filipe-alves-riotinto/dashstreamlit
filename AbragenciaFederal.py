@@ -58,7 +58,7 @@ def fichas():
     
     df_fichas['li_foto'] = df_fichas['li_foto'].str.replace('datarepo', 'datalake')
     df_fichas.loc[df_fichas['nu_titulo_eleitor'] == '026474760906', 'ds_eleicao'] = 'Eleito' #Incluir GEOVANIA DE SA na lista de eleitos
-    
+
     return df_fichas
 
 def fichas_valor():
@@ -107,3 +107,6 @@ def fichas_com_votos_municipio():
     )
 
     return df_fichas_com_votos_municipio
+
+#fichas = pd.DataFrame(fichas_com_votos())
+#fichas.to_csv(f'documentoCsv.csv', index=False, sep=';') 
