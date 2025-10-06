@@ -1,9 +1,9 @@
 import streamlit as st
 import pandas as pd
 from datetime import datetime
-import plotly.express as px
-import matplotlib.colors as mcolors
-import random
+#import plotly.express as px
+#import matplotlib.colors as mcolors
+#import random
 import AbragenciaFederal
 #import assistente
 import graficos
