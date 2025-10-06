@@ -4,7 +4,6 @@ from datetime import datetime
 import plotly.express as px
 import matplotlib.colors as mcolors
 import random
-import AbragenciaFederal
 
 
 #eleicao2022 = AbragenciaFederal.fichas_com_votos()
@@ -166,7 +165,7 @@ def grafico_pizza(base, filtro):
 
 def card_resultado(base, filtro, texto):
     total_candidatos = base[base['nm_cargo'] == filtro].shape[0]
-    total_candidatos_eleitos = AbragenciaFederal.fichas()[(AbragenciaFederal.fichas()['nm_cargo'] == filtro) & (AbragenciaFederal.fichas()['ds_eleicao'] == 'Eleito')].shape[0]
+    total_candidatos_eleitos = base[(base['nm_cargo'] == filtro) & (base['ds_eleicao'] == 'Eleito')].shape[0]
 
     if texto == "Eleito":
         candidatosEleitos = base[(base['ds_eleicao'] == 'Eleito') & (base['nm_cargo'] == filtro)].shape[0]

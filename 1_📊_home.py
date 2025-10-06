@@ -5,11 +5,13 @@ import plotly.express as px
 import matplotlib.colors as mcolors
 import random
 import AbragenciaFederal
-import assistente
+#import assistente
 import graficos
 
+
+
 #Carregar dados
-eleicao2022 = AbragenciaFederal.fichas_com_votos()
+eleicao2022 = AbragenciaFederal.Eleicao2022.fichas_com_votos()
 st.session_state["data"] = eleicao2022
 
 ### Configurações do Streamlit
@@ -48,7 +50,6 @@ filto_resultado = st.sidebar.pills("Resultado", opcoes_resultado, selection_mode
 if filto_resultado is not None:
     eleicao2022 = eleicao2022[eleicao2022['ds_eleicao'] == filto_resultado]
 
-
 ####Montar pagina
 st.markdown("# GRAFICO DE DADOS DOS CANDIDATOS FEDERAIS! 🇧🇷")
 
@@ -72,29 +73,32 @@ with Senador:
     st.dataframe(eleicao2022[eleicao2022['nm_cargo'] == 'Senador'])
 
 # Criar tabelas e gráficos para Deputado Federal
-with DepFederal:   
-    st.markdown("## Deputado Federal")
+with DepFederal:
+    options = ["Resumo", "2022", "2018", "2014"]
+    selection = st.pills("",options, label_visibility='collapsed', selection_mode="single", default= "2022")
+
+    st.markdown(f"## Deputado Federal - {selection}")
  
-    col1 , col2, col3 = st.columns(3)
-    with col1:
-        graficos.card_resultado(eleicao2022metric, filtro='Deputado Federal', texto='Eleito')
-    with col2:
-        graficos.card_resultado(eleicao2022metric, filtro='Deputado Federal', texto='Não eleito')
-    with col3:
-        graficos.card_resultado(eleicao2022metric, filtro='Deputado Federal', texto='Candidatos')
-    
-    #st.divider()
+    if selection == "2022":
+        col1 , col2, col3 = st.columns(3)
+        with col1:
+            graficos.card_resultado(eleicao2022metric, filtro='Deputado Federal', texto='Eleito')
+        with col2:
+            graficos.card_resultado(eleicao2022metric, filtro='Deputado Federal', texto='Não eleito')
+        with col3:
+            graficos.card_resultado(eleicao2022metric, filtro='Deputado Federal', texto='Candidatos')
+        
+        #st.divider()
+        col1, col2 = st.columns(2)
+        with col1:
+            st.markdown("### Gráfico de Partidos")
+            graficos.grafico_barra(eleicao2022, filtro='Deputado Federal')        
+        with col2:
+            st.markdown("### Gráfico de UF")
+            graficos.grafico_linha_uf(eleicao2022, filtro='Deputado Federal')
 
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("### Gráfico de Partidos")
-        graficos.grafico_barra(eleicao2022, filtro='Deputado Federal')        
-    with col2:
-        st.markdown("### Gráfico de UF")
-        graficos.grafico_linha_uf(eleicao2022, filtro='Deputado Federal')
-
-    #st.write("Tipo da coluna:", eleicao2022["FEFC"].dtype)  # Deve ser int64
-    #st.divider
+        #st.write("Tipo da coluna:", eleicao2022["FEFC"].dtype)  # Deve ser int64
+        #st.divider
 
     st.markdown("### Gráfico de valores por partido")
     col1, col2 = st.columns(2)
@@ -104,8 +108,7 @@ with DepFederal:
         graficos.grafico_pizza(eleicao2022, filtro='Deputado Federal')
     graficos.tabela_dados(eleicao2022, filtro='Deputado Federal')
 
-    assistente.assistente(eleicao2022, filtro='Deputado Federal')
-
+    #assistente.assistente(eleicao2022, filtro='Deputado Federal')
 # Criar tabelas e gráficos para Deputado Estadual
 with DepEstadual:   
     st.markdown("## Deputado Estadual")

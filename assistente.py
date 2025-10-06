@@ -124,7 +124,7 @@ def assistente(df, filtro):
     # PERGUNTA SOBRE OS DADOS
     st.markdown("---")
     st.markdown("### 🔎 Perguntas sobre os dados")
-    pergunta_sobre_dados = st.text_input("Faça uma pergunta sobre os dados (ex: 'Qual é a média do tempo de entrega?')")
+    pergunta_sobre_dados = st.text_input("Faça uma pergunta sobre os dados (ex: 'Qual a quantidade de candidatos eleitos?')")
     if st.button("Responder pergunta", key="responder_pergunta_dados"):
         with st.spinner("Analisando os dados 🧞"):
             resposta = orquestrador.invoke({"input": pergunta_sobre_dados})
@@ -133,7 +133,7 @@ def assistente(df, filtro):
     # GERAÇÃO DE GRÁFICOS
     st.markdown("---")
     st.markdown("### 📊 Criar gráfico com base em uma pergunta")
-    pergunta_grafico = st.text_input("Digite o que deseja visualizar (ex: 'Crie um gráfico da média de tempo de entrega por clima.')")
+    pergunta_grafico = st.text_input("Digite o que deseja visualizar (ex: 'Crie um gráfico da média eleitos por partido.')")
     if st.button("Gerar gráfico", key="gerar_grafico"):
         with st.spinner("Gerando o gráfico 🧞"):
             orquestrador.invoke({"input": pergunta_grafico})
