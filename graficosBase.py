@@ -3,8 +3,8 @@ import plotly.express as px
 import matplotlib.colors as mcolors
 import random
 
-
 #eleicao2022 = AbragenciaFederal.fichas_com_votos()
+
 
 def teste():
     st.title("Teste")
